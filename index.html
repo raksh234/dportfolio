@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rakshan's Portfolio - Aspiring Creative Designer">
+    <meta name="author" content="Rakshan">
+    <title>Rakshan's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐾</text></svg>">
+    <style>
+        :root {
+            --bg-dark: #2C1E1E;
+            --bg-light: #FDE6D0;
+            --accent: #8A4FFF; /* A cooler purple accent */
+            --text-dark: #2C1E1E;
+            --text-light: #FDE6D0;
+            --card-bg: #3A2B2B;
+            --cat-primary: #FDE6D0; /* Cat's main color */
+            --cat-secondary: #2C1E1E; /* Cat's ear/tail tips */
+            --cat-eye: #4CAF50; /* Cute green eyes */
+            --title-size: 90px; /* Larger title size */
+            --title-margin-top: 100px; /* More space above title */
+            --title-margin-bottom: 80px; /* More space below title */
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+            text-align: center; /* Center the initial content */
+        }
+
+        body.light-mode {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+            position: relative;
+            text-align: left; /* Reset text alignment for content within */
+        }
+
+        header {
+            display: flex;
+            justify-content: center; /* Center the title */
+            align-items: center;
+            margin-bottom: var(--title-margin-bottom);
+            padding-top: var(--title-margin-top); /* Move title down */
+        }
+
+        h1 {
+            font-size: var(--title-size);
+            margin: 0;
+            font-weight: 600; /* Make it stand out */
+        }
+
+        h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: inherit;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            position: absolute; /* Position it to the right */
+            top: 10px;
+            right: 20px;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+        }
+
+        .about {
+            margin-bottom: 50px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .skill {
+            background: var(--accent);
+            color: var(--text-light);
+            padding: 8px 20px; /* Slightly more padding */
+            border-radius: 25px; /* More rounded */
+            font-size: 16px; /* Slightly larger font */
+            font-weight: 600;
+        }
+
+        .projects {
+            margin-top: 50px;
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .project {
+            background: #5A3F3F;
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .project h3 {
+            margin-top: 0;
+            color: var(--accent);
+        }
+
+        .project p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .project .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .project .tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px; /* Adjusted padding */
+            border-radius: 12px; /* More rounded */
+            font-size: 12px;
+        }
+
+        .contact {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: inherit;
+            font-size: 24px;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Cute and Cool Cat Styles - More Cat-like */
+        .cat {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px; /* Slightly smaller for cuteness */
+            height: 90px; /* Adjusted height */
+            background: var(--cat-primary);
+            border-radius: 50%; /* Rounder body */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .cat.hidden {
+            display: none !important;
+        }
+
+        .cat:hover {
+            transform: translateX(-50%) scale(1.05) translateY(-5px); /* Subtle hover effect */
+        }
+
+        .cat-head {
+            position: absolute;
+            top: -20px; /* Position head slightly above body */
+            width: 60px;
+            height: 60px;
+            background: var(--cat-primary);
+            border-radius: 55%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .cat .ears {
+            position: absolute;
+            top: -15px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 25px solid var(--cat-primary);
+        }
+
+        .cat .ear-left {
+            left: 5px;
+            transform: rotate(-30deg);
+            border-bottom-color: var(--cat-secondary); /* Darker inside ear */
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            width: 20px;
+            height: 20px;
+            top: -25px;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 18px solid var(--cat-primary);
+            left: -5px;
+            transform: rotate(-45deg);
+            border-bottom-color: var(--cat-secondary);
+        }
+
+        .cat .ear-right {
+            right: 5px;
+            transform: rotate(30deg);
+            border-bottom-color: var(--cat-secondary); /* Darker inside ear */
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            width: 20px;
+            height: 20px;
+            top: -25px;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 18px solid var(--cat-primary);
+            right: -5px;
+            transform: rotate(45deg);
+            border-bottom-color: var(--cat-secondary);
+        }
+
+        .cat .face {
+            position: absolute;
+            top: 10px;
+            width: 70%;
+            height: 60%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cat .eyes {
+            display: flex;
+            gap: 10px;
+        }
+
+        .cat .eye {
+            width: 12px;
+            height: 12px;
+            background: var(--cat-eye);
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cat .pupil {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 4px;
+            height: 4px;
+            background: var(--cat-secondary);
+            border-radius: 50%;
+        }
+
+        .cat .nose {
+            width: 8px;
+            height: 5px;
+            background: #F48FB1; /* Cute pink nose */
+            border-radius: 50%;
+            margin-top: 5px;
+        }
+
+        .cat .mouth {
+            position: relative;
+            top: 2px;
+            width: 15px;
+            height: 8px;
+            border-bottom: 1px solid var(--cat-secondary);
+            border-radius: 0 0 50% 50%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .cat .whiskers {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 1px;
+            background: var(--cat-secondary);
+            opacity: 0.7;
+        }
+
+        .cat .whiskers-left-top {
+            left: -25px;
+            transform: translateY(-8px) rotate(-15deg);
+        }
+
+        .cat .whiskers-left-bottom {
+            left: -25px;
+            transform: translateY(8px) rotate(15deg);
+        }
+
+        .cat .whiskers-right-top {
+            right: -25px;
+            transform: translateY(-8px) rotate(15deg);
+        }
+
+        .cat .whiskers-right-bottom {
+            right: -25px;
+            transform: translateY(8px) rotate(-15deg);
+        }
+
+        .cat .tail {
+            position: absolute;
+            bottom: -20px;
+            left: 60px;
+            width: 10px;
+            height: 40px;
+            background: var(--cat-primary);
+            border-radius: 50%;
+            transform-origin: top center;
+            animation: wiggle 1.5s infinite alternate ease-in-out;
+            clip-path: polygon(0% 0%, 100% 0%, 70% 100%, 30% 100%);
+        }
+
+        .cat .tail::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: -3px;
+            width: 6px;
+            height: 15px;
+            background: var(--cat-secondary);
+            border-radius: 50%;
+        }
+
+        @keyframes wiggle {
+            0% { transform: rotate(10deg); }
+            100% { transform: rotate(-10deg); }
+        }
+
+        .speech-bubble {
+            position: absolute;
+            bottom: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            color: black;
+            padding: 8px 12px;
+            border-radius: 10px;
+            display: none;
+            font-size: 12px;
+            width: auto; /* Adjust width based on content */
+            max-width: 150px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 101;
+            text-align: center;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -6px;
+            border-width: 6px;
+            border-style: solid;
+            border-color: white transparent transparent transparent;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            :root {
+                --title-size: 60px;
+                --title-margin-top: 80px;
+                --title-margin-bottom: 60px;
+            }
+            h2 {
+                font-size: 28px;
+            }
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            .cat {
+                width: 80px;
+                height: 70px;
+            }
+            .cat-head {
+                width: 45px;
+                height: 45px;
+                top: -15px;
+            }
+            .cat .ears {
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+                border-bottom: 18px solid var(--cat-primary);
+            }
+            .cat .ear-left {
+                top: -20px;
+                left: -3px;
+            }
+            .cat .ear-right {
+                top: -20px;
+                right: -3px;
+            }
+            .cat .tail {
+                left: 50px;
+                height: 30px;
+            }
+            .theme-toggle {
+                font-size: 20px;
+                top: 5px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Raksh</h1>
+    </header>
+    <div class="container">
+        <button class="theme-toggle" aria-label="Toggle theme">
+            <i class="fas fa-moon"></i>
+        </button>
+<section class="about">
+            <h2>About Me</h2>
+            <p>Hi, I'm Rakshan, an aspiring creative designer with a growing passion for crafting visually appealing and user-friendly digital experiences. I'm currently honing my skills in graphic design, UI/UX principles, and exploring the exciting world of animation. I believein the power of design to communicate effectively and bring ideas to life.</p>
+
+            <div class="skills">
+                <span class="skill">Graphic Design Fundamentals</span>
+                <span class="skill">UI Design Exploration</span>
+                <span class="skill">Prototyping Basics</span>
+                <span class="skill">Visual Communication</span>
+                <span class="skill">Learning 2D Animation</span>
+                <span class="skill">User-Centered Thinking</span>
+            </div>
+        </section>
+
+        <section class="projects">
+            <h2>Aspiring Projects</h2>
+            <div class="project-grid">
+                <div class="project" onclick="showProjectDetails('concept-illustrations')">
+                    <h3>Concept Illustrations</h3>
+                    <p>A collection of personal illustrations and early explorations of character and environment design.</p>
+                    <div class="tags">
+                        <span class="tag">Illustration</span>
+                        <span class="tag">Digital Painting</span>
+                        <span class="tag">Concept Art</span>
+                    </div>
+                </div>
+
+                <div class="project" onclick="showProjectDetails('ui-redesigns')">
+                    <h3>UI Redesigns (Conceptual)</h3>
+                    <p>Conceptual redesigns of popular app interfaces, focusing on improving usability and visual aesthetics.</p>
+                    <div class="tags">
+                        <span class="tag">UI Design</span>
+                        <span class="tag">Usability</span>
+                        <span class="tag">Figma</span>
+                    </div>
+                </div>
+
+                <div class="project" onclick="showProjectDetails('portfolio-cat-study')">
+                    <h3>Portfolio Cat Interaction Study</h3>
+                    <p>An exploration into creating an engaging and interactive element for a portfolio, like the animated cat on this page.</p>
+                    <div class="tags">
+                        <span class="tag">UI Element</span>
+                        <span class="tag">Interaction Design</span>
+                        <span class="tag">Animation Concepts</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact">
+            <h2>Let's Connect!</h2>
+            <p>I'm always eager to learn and collaborate on exciting design projects. Feel free to reach out for a chat!</p>
+
+            <div class="social-links">
+                <a href="mailto:your.email@example.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/your-github" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://dribbble.com/your-dribbble" target="_blank" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+                <a href="https://linkedin.com/in/your-linkedin" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </section>
+    </div>
+
+    <div class="cat" onmouseover="showMessage()" onmouseout="hideMessage()" onclick="catJump()">
+        <div class="ears ear-left"></div>
+        <div class="ears ear-right"></div>
+        <div class="cat-head">
+            <div class="face">
+                <div class="whiskers whiskers-left-top"></div>
+                <div class="whiskers whiskers-left-bottom"></div>
+                <div class="whiskers whiskers-right-top"></div>
+                <div class="whiskers whiskers-right-bottom"></div>
+                <div class="eyes">
+                    <div class="eye eye-left">
+                        <div class="pupil"></div>
+                    </div>
+                    <div class="eye eye-right">
+                        <div class="pupil"></div>
+                    </div>
+                </div>
+                <div class="nose"></div>
+                <div class="mouth"></div>
+            </div>
+        </div>
+        <div class="tail"></div>
+        <div class="speech-bubble" id="catMessage">Meow!</div>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const icon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+
+            if (document.body.classList.contains('light-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // Cat functionality
+        const catElement = document.querySelector('.cat');
+        let isCatVisible = true;
+
+        function showMessage() {
+            let messages = [
+                "Purrrrfect!",
+                "Designing dreams...",
+                "Just observing...",
+                "Hello there! 👋",
+                "Need a paw-some design?",
+                "Meow-tivating ideas!",
+                "Click me for a surprise!",
+                "Light or dark, design shines!",
+                "Always learning and growing!"
+            ];
+            let randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            let bubble = document.getElementById("catMessage");
+            bubble.innerText = randomMessage;
+            bubble.style.display = "block";
+        }
+
+        function hideMessage() {
+            document.getElementById("catMessage").style.display = "none";
+        }
+
+        function catJump() {
+            if (isCatVisible) {
+                catElement.classList.add('jump-animation');
+                setTimeout(() => {
+                    catElement.classList.remove('jump-animation');
+                }, 500);
+            }
+        }
+
+        // Add jump animation to styles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes jump {
+                0% { transform: translateX(-50%) translateY(0); }
+                50% { transform: translateX(-50%) translateY(-30px); }
+                100% { transform: translateX(-50%) translateY(0); }
+            }
+            .jump-animation {
+                animation: jump 0.5s;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Eye following cursor (more responsive)
+        document.addEventListener("mousemove", (event) => {
+            const catHead = document.querySelector(".cat-head");
+            const eyeLeftPupil = document.querySelector(".eye-left .pupil");
+            const eyeRightPupil = document.querySelector(".eye-right .pupil");
+            const headRect = catHead.getBoundingClientRect();
+            const centerX = headRect.left + headRect.width / 2;
+            const centerY = headRect.top + headRect.height / 2;
+            const deltaX = event.clientX - centerX;
+            const deltaY = event.clientY - centerY;
+            const angle = Math.atan2(deltaY, deltaX);
+            const moveDistance = 2; // Adjust for sensitivity
+            const moveX = Math.cos(angle) * moveDistance;
+            const moveY = Math.sin(angle) * moveDistance;
+
+            if (eyeLeftPupil && eyeRightPupil) {
+                eyeLeftPupil.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
+                eyeRightPupil.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
+            }
+        });
+
+        // Project details function
+        function showProjectDetails(projectId) {
+            // In a real implementation, this would show a modal or navigate to a project page
+            alert(`Exploring the aspirations behind: ${projectId}\n\nImagine a showcase of mockups, sketches, and the design thinking process here!`);
+        }
+
+        // Cat appearance/disappearance on scroll
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY || window.pageYOffset;
+            const windowHeight = window.innerHeight;
+            const bodyHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+
+            if (scrollPosition + windowHeight >= bodyHeight - 5) { // Reached the bottom (with a small buffer)
+                if (isCatVisible) {
+                    catElement.classList.add('hidden');
+                    isCatVisible = false;
+                }
+            } else if (scrollPosition < bodyHeight - windowHeight - 5) { // Scrolled up from the bottom
+                if (!isCatVisible) {
+                    catElement.classList.remove('hidden');
+                    isCatVisible = true;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
